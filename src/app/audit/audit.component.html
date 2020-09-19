@@ -1,0 +1,36 @@
+<h1>Hi {{currentUser.firstName}}!</h1>
+<p>You're logged in with Angular 8!!</p>
+<h3>All login audit :</h3>
+
+<!-- <select name="dateFormat">
+    <option value="1">12 Hrs</option>
+    <option value="1">24 Hrs</option>
+</select> -->
+
+<div class="text-center" *ngIf="!showTable">Loading....</div>
+
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover" [style.visibility]="toggleTable()">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Login Time</th>
+            <th>Logout Time</th>
+            <th>ip</th>
+        </tr>
+    </thead>
+    <tbody *ngIf="audits?.length != 0">
+        <tr *ngFor="let audit of audits">
+            <td>{{ audit._id }}</td>
+            <td>{{ audit.user }}</td>
+            <td>{{ audit.loginTime | date : dateFormat}}</td>
+            <td>{{ audit.logoutTime | date : dateFormat}}</td>
+            <td>{{ audit.ip }}</td>
+        </tr>
+    </tbody>
+    <tbody *ngIf="audits?.length == 0">
+        <tr>
+            <td colspan="5" class="no-data-available">No data!</td>
+        </tr>
+        <tbody>
+</table>
